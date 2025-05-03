@@ -1,1 +1,1 @@
-Django study
+Django Learning Log
