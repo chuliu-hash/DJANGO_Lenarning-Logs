@@ -1,0 +1,17 @@
+{% extends 'learning_logs/base.html' %}
+{% block content %}
+
+<p>Topic: {{topic.text}}</p>
+
+<p>Entries:</p>
+<ul>
+	{% for entry in entries %}
+	<li>
+		<p>{{ entry.create_date|date:'M d, Y H:i' }}</p>
+		<p>{{ entry.text|linebreaks }}</p>
+	</li>
+	{% empty %}
+	<li>No entries available for this topic.</li>
+	{% endfor %}
+</ul>
+{% endblock content %}
