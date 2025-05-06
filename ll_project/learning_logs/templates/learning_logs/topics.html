@@ -2,18 +2,21 @@
 
 {% block content %}
 
-<p>Topics</p>
+<a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
+
 <p>Here are the topics you can explore in the Learning_Log:</p>
 
 <ul>
 	{% for topic in topics %}
 	<li>
 		<a href="{% url 'learning_logs:topic' topic.id %}">
-		{{ topic.text }}</a>
+			{{ topic.text }}</a>
 	</li>
 	{% empty %}
 	<li>No topics available.</li>
 	{% endfor %}
 </ul>
+
+
 
 {% endblock content %}
