@@ -1,7 +1,10 @@
 {% extends 'learning_logs/base.html' %}
 {% block content %}
 
-<a href="{% url 'learning_logs:new_entry' topic.id %}">Add a new entry</a>
+<p><a href="{% url 'learning_logs:edit_topic' topic.id %}">Edit this topic</a></p>
+
+<p><a href="{% url 'learning_logs:new_entry' topic.id %}">Add a new entry</a></p>
+
 
 <p>Topic: {{topic.text}}</p>
 
@@ -11,6 +14,7 @@
 	<li>
 		<p>{{ entry.create_date|date:'M d, Y H:i' }}</p>
 		<p>{{ entry.text|linebreaks }}</p>
+		<p><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit this entry</a></p>
 	</li>
 	{% empty %}
 	<li>No entries available for this topic.</li>

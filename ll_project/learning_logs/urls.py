@@ -8,12 +8,22 @@ app_name = 'learning_logs'
 urlpatterns = [
 	# 主页, http://localhost:8000/
 	path('', views.index, name='index'),
+
 	# 主题列表页, http://localhost:8000/topics/
 	path('topics/', views.topics, name='topics'),
+
 	# 主题详情页, http://localhost:8000/topics/topic_id/
 	path('topics/<int:topic_id>/', views.topic, name='topic'),
+
 	# 添加新主题, http://localhost:8000/new_topic/
 	path('new_topic/', views.new_topic, name='new_topic'),
+
 	# 在特定主题添加新条目, http://localhost:8000/new_entry/topic_id/
 	path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),
+
+	# 编辑主题, http://localhost:8000/edit_topic/topic_id/
+	path('edit_topic/<int:topic_id>/', views.edit_topic, name='edit_topic'),
+	
+	# 编辑特定条目， http://localhost:8000/edit_entry/entry_id/
+	path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
 ]
