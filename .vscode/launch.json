@@ -8,7 +8,7 @@
 			"name": "Python 调试程序: Django shell",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "./ll_project/manage.py",
+			"program": "./manage.py",
 			"console": "integratedTerminal",
 			"args": [
 				"shell"
@@ -18,7 +18,7 @@
 			"name": "Python 调试程序: Django migrate",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "./ll_project/manage.py",
+			"program": "./manage.py",
 			"console": "integratedTerminal",
 			"args": [
 				"migrate"
@@ -28,7 +28,7 @@
 			"name": "Python 调试程序: Django runserver",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "./ll_project/manage.py",
+			"program": "./manage.py",
 			"console": "integratedTerminal",
 			"args": [
 				"runserver"
@@ -38,18 +38,18 @@
 			"name": "Python 调试程序: Django startpp",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "./ll_project/manage.py",
+			"program": "./manage.py",
 			"console": "integratedTerminal",
 			"args": [
 				"startapp",
-				"learning_logs"
+				"accounts"
 			]
 		},
 		{
 			"name": "Python 调试程序: Django makemigrations",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "./ll_project/manage.py",
+			"program": "./manage.py",
 			"console": "integratedTerminal",
 			"args": [
 				"makemigrations",
@@ -60,7 +60,7 @@
 			"name": "Python 调试程序: Django createsuperuser",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "./ll_project/manage.py",
+			"program": "./manage.py",
 			"console": "integratedTerminal",
 			"args": [
 				"createsuperuser"
