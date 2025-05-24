@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
-# Create your views here.
+
 
 def index(request):
 	"""学习笔记的主页"""
