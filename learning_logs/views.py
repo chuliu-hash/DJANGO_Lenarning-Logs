@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
+from .utils import check_topic_owner
 
 
 def index(request):
@@ -19,6 +20,10 @@ def topics(request):
 def topic(request, topic_id):
 	"""显示单个主题及其所有的条目"""
 	topic = Topic.objects.get(id=topic_id)
+
+	# 如果主题不属于当前用户，抛出404错误
+	check_topic_owner(topic, request.user)
+	
 	entries = topic.entry_set.order_by('-create_date') # 减号表示降序排列
 	context = {'topic': topic, 'entries': entries}
 	return render(request, 'learning_logs/topic.html', context)
@@ -26,6 +31,7 @@ def topic(request, topic_id):
 @login_required
 def new_topic(request):
 	"""添加新主题"""
+	
 	if request.method != 'POST':
 		# 未提交数据，创建一个新主题表单
 		form = TopicForm()
@@ -33,7 +39,9 @@ def new_topic(request):
 		# POST提交的数据，对数据进行处理
 		form = TopicForm(data=request.POST)
 		if form.is_valid():
-			form.save()
+			new_topic = form.save(commit=False)
+			new_topic.owner = request.user
+			new_topic.save()
 			return redirect('learning_logs:topics')
 	# 显示空表单或指出表单数据无效
 	context = {'form': form}
@@ -43,6 +51,10 @@ def new_topic(request):
 def new_entry(request, topic_id):
 	"""在特定主题添加新条目"""
 	topic = Topic.objects.get(id=topic_id)
+
+	# 如果主题不属于当前用户，抛出404错误
+	check_topic_owner(topic,request.user)
+	
 	if request.method != 'POST':
 		# 未提交数据，创建一个新条目表单
 		form = EntryForm()
@@ -52,7 +64,7 @@ def new_entry(request, topic_id):
 		if form.is_valid():
 			new_entry = form.save(commit=False)  # 不保存到数据库
 			new_entry.topic = topic  # 将主题与条目关联
-			new_entry.save()  # 保存到数据库
+			new_entry.save()   # 保存条目到数据库
 			return redirect('learning_logs:topic', topic_id=topic_id)
 		
 	# 显示空表单或指出表单数据无效
@@ -63,6 +75,10 @@ def new_entry(request, topic_id):
 def edit_topic(request, topic_id):
 	"""编辑主题"""
 	topic = Topic.objects.get(id=topic_id)
+
+	# 如果主题不属于当前用户，抛出404错误
+	check_topic_owner(topic,request.user)
+	
 	if request.method != 'POST':
 		# 初次请求，使用当前主题填充表单
 		form = TopicForm(instance=topic)
@@ -82,6 +98,10 @@ def edit_entry(request, entry_id):
 	"""编辑条目"""
 	entry = Entry.objects.get(id=entry_id)
 	topic = entry.topic
+
+	# 如果主题不属于当前用户，抛出404错误
+	check_topic_owner(topic,request.user)
+	
 	if request.method != 'POST':
 		# 初次请求，使用当前条目填充表单
 		form = EntryForm(instance=entry)

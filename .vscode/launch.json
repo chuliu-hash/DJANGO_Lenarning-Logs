@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Python 调试程序: Django shell",
+			"name": "Django shell",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "./manage.py",
@@ -15,7 +15,7 @@
 			]
 		},
 		{
-			"name": "Python 调试程序: Django migrate",
+			"name": "Django migrate",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "./manage.py",
@@ -25,7 +25,7 @@
 			]
 		},
 		{
-			"name": "Python 调试程序: Django runserver",
+			"name": "Django runserver",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "./manage.py",
@@ -35,7 +35,7 @@
 			]
 		},
 		{
-			"name": "Python 调试程序: Django startpp",
+			"name": "Django startpp",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "./manage.py",
@@ -46,7 +46,7 @@
 			]
 		},
 		{
-			"name": "Python 调试程序: Django makemigrations",
+			"name": "Django makemigrations",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "./manage.py",
@@ -57,7 +57,7 @@
 			]
 		},
 		{
-			"name": "Python 调试程序: Django createsuperuser",
+			"name": "Django createsuperuser",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "./manage.py",
