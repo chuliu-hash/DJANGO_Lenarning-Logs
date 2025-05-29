@@ -1,23 +1,76 @@
-<p>
-	<a href="{% url 'learning_logs:index' %}">Learning Log</a> ----
-	<a href="{% url 'learning_logs:topics' %}">Topics</a>
-</p>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-	{% if user.is_authenticated %}
-	Hello, {{ user.username }}.
-	{% else %}
-	<a href="{% url 'accounts:register' %}">Register</a> ----
-	<a href="{% url 'accounts:login' %}">Log in</a>
-	{% endif %}
-</p>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Learning Log</title>
 
-{% block content %}{% endblock content %}
+	{% load django_bootstrap5 %}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
 
-{% if user.is_authenticated %}
-<hr />
-<form action="{% url 'accounts:logout' %}" method="post">
-	{% csrf_token %}
-	<button name='submit'>Log out</button>
-</form>
-{% endif %}
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+		<!--定义导航栏-->
+		<div class="container-fluid">
+			<!--定义导航栏的Learning Log元素-->
+			<a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+			<!--定义导航栏折叠时的下拉按钮-->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!--定义导航栏可折叠部分-->
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item">
+						<!--定义导航栏的Topics链接-->
+						<a class="nav-link" href="{% url 'learning_logs:topics' %}">Topics</a>
+					</li>
+				</ul>
+				<!--定义与账号相关的链接-->
+				<ul class="navbar-nav ms-auto mb-2 mb-md-0">
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+						<!--显示登陆问候语-->>
+						<span class="navbar-text me-2">Hello, {{ user.username }}!</span>
+					</li>
+					{% else %}
+					<li class="nav-item">
+						<!--显示未登录时的注册链接-->
+						<a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+					</li>
+					<li class="nav-item">
+						<!--显示未登录时的登录链接-->
+						<a class="nav-link" href="{% url 'accounts:login' %}">Log in</a>
+					</li>
+					{% endif %}
+				</ul>
+				<!--登录时添加注销表单-->
+				{% if user.is_authenticated %}
+				<form action="{% url 'accounts:logout' %}" method="post">
+					{% csrf_token %}
+					<button class="btn btn-outline-secondary btn-sm" name="submit">Log out</button>
+				</form>
+				{% endif %}
+
+			</div>
+		</div>
+	</nav>
+
+	<main class="container">
+		<!--定义主内容区域-->
+		<div class="pb-2 mb-2 border-bottom">
+			{% block page_header %}{% endblock page_header%}
+		</div>
+		<div>
+			{% block content %}{% endblock content%}
+		</div>
+	</main>
+
+</body>
+
+</html>
