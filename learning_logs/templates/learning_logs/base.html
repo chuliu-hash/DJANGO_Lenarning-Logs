@@ -18,7 +18,7 @@
 		<div class="container-fluid">
 			<!--定义导航栏的Learning Log元素-->
 			<a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
-			<!--定义导航栏折叠时的下拉按钮-->
+			<!--定义导航栏折叠时的下拉菜单按钮-->
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
 				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -62,11 +62,13 @@
 	</nav>
 
 	<main class="container">
-		<!--定义主内容区域-->
+		<!--定义主内容区域,由继承base.html的其他html确定具体内容-->
 		<div class="pb-2 mb-2 border-bottom">
+			<!--定义页面标题区域-->
 			{% block page_header %}{% endblock page_header%}
 		</div>
 		<div>
+			<!--定义页面内容区域-->
 			{% block content %}{% endblock content%}
 		</div>
 	</main>
